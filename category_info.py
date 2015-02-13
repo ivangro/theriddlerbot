@@ -56,7 +56,8 @@ def get_all_attributes(characterName):
                 for superCat in row["Super Category"]:
                     if len(superCat) > 0 and superCat.lower() not in superCategories:
                         #print "Super cat found ",  superCat,  " from ",  cat
-                        superCategories.append(superCat.lower())    
+                        if (superCat.lower() != 'professional'):    #Removes the professional super category from the list
+                            superCategories.append(superCat.lower())    
     
     atts["IS_A"].extend(superCategories)
     return atts
