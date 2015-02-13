@@ -1,0 +1,9 @@
+IS_A	CLOTHES	OPPONENT	OPPONENT_ACTIVITY	MARRIED_TO	DIVORCED_FROM	TYPICAL_ACTIVITY	VEHICLE	GA_ANALOGY	FW_ANALOGY	COUNTRY
+be/VB OBJ	wear/VB OBJ	do/VB not like OBJ	be/VB against people who like OBJ	be/VB married to OBJ	used to love OBJ	like/VB OBJ	drive/VB OBJ	be/VB the OBJ2 of OBJ1	be/VB the OBJ2 of OBJ1	live/VB in OBJ
+be/VB known as OBJ	have/VB been seen wearing OBJ	hate/VB OBJ	be/VB hate people who like OBJ	be/VB in love with OBJ	be/VB divorced from OBJ	love/VB OBJ		be/VB the OBJ2 of OBJ1	be/VB similar to someone in OBJ3	can/VB be found in OBJ
+be/VB ADJ OBJ	like/VB wearing OBJ	would not eat a pizza with OBJ	would not eat a pizza with people who like OBJ	fancy/VB OBJ		spend/VB a lot of time OBJ		be/VB the OBJ2 of OBJ1	be/VB the OBJ2 of OBJ1	
+be/VB OBJ, ADJP yet ADJN		be/VB definitely not a close friend of OBJ	be/VB definitely not a close friend of OBJ	care/VB for OBJ		enjoy/VB OBJ		could have belonged to OBJ3 - but do/VB not		
+be/VB OBJ, ADJN yet ADJP		would like to see “OBJ” written on a tombstone	be/VB opposition to people who like OBJ	crave/VB for OBJ				could have been part of OBJ3 - but be/VB not		
+be/VB OBJ, ADJN but ADJP		be/VB against OBJ	his/her arch enemy like OBJ					be/VB like OBJ2 but be/VB not part of OBJ3		
+be/VB OBJ, ADJP but ADJN		be/VB opposition to OBJ								
+		oppose/VB OBJ								
