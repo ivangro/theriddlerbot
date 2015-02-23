@@ -1,0 +1,15 @@
+IS_A	be/VB OBJ	be/VB known as OBJ	be/VB ADJ OBJ	be/VB OBJ, ADJP yet ADJN	be/VB OBJ, ADJN yet ADJP	be/VB OBJ, ADJN but ADJP	be/VB OBJ, ADJP but ADJN
+CLOTHES	wear/VB OBJ	have/VB been seen wearing OBJ	like/VB wearing OBJ
+OPPONENT	do/VB not like OBJ	hate/VB OBJ	would not eat a pizza with OBJ	be/VB definitely not a close friend of OBJ	would like to see "OBJ" written on a tombstone	be/VB against OBJ	be/VB opposition to OBJ	oppose/VB OBJ
+OPPONENT_ACTIVITY	be/VB against people who like OBJ	hate/VB people who like OBJ	would not eat a pizza with people who like OBJ	be/VB definitely not a close friend of OBJ	be/VB opposition to people who like OBJ
+MARRIED_TO	be/VB married to OBJ	be/VB in love with OBJ	fancy/VB OBJ	care/VB for OBJ
+DIVORCED_FROM	used to love OBJ	be/VB divorced from OBJ
+TYPICAL_ACTIVITY	like/VB OBJ	love/VB OBJ	spend/VB a lot of time OBJ	enjoy/VB OBJ
+VEHICLE	drive/VB OBJ
+GA_ANALOGY	be/VB the OBJ2 of OBJ1	could have belonged to OBJ3 - but do/VB not	could have been part of OBJ3 - but be/VB not	be/VB like OBJ2 but be/VB not part of OBJ3
+FW_ANALOGY	be/VB the OBJ2 of OBJ1	be/VB similar to someone in OBJ3	be/VB the OBJ2 of OBJ1
+COUNTRY	live/VB in OBJ	can/VB be found in OBJ
+ANSW_1SG	Well, I'm only NE.	You might have guessed I'm NE.	Did you know I'm NE?	I'm NE.
+ANSW_3SG	Turns out it's NE.	It's NE.	The answer is NE.	Did you know it's NE?	NE was the right answer.	NE was the correct answer.
+RESP_CORRECT	was right. It's NE.	Good job! The correct answer was NE.	Well done! The right answer was indeed NE.	You did it! The answer was indeed NE.	1 point for you for the splendid right answer: NE.	Score! NE was correct.
+RESP_INCORRECT	Can't say you're right.	I seriously doubt this answer is correct.	Not quite correct. Feel free to try again.	Nope, sorry.	Sorry, better luck next time!	Hope you're not giving up yet.	Can you think of someone else?	Try again.	You're not quite there yet. Keep looking for the right answer!	That's not the right answer.	Thank you, but that's not correct.	Sorry, that's not right.	You're wrong on that one. Try again!
