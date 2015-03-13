@@ -68,13 +68,13 @@ def riddlerbot():
 for x in range(1):
 	riddle = None
 	# Make sure the riddles are not longer than 140 characters to fit in a tweet
-	while not riddle or len(riddle) > 140 or riddle in db.riddles.filter('id'):
+	while not riddle or len(riddle) > 140 or riddle in db.riddles.filter('text'):
 		riddle,NE = riddlerbot()
 
 	if riddle:
 		#print riddle
 		#print
-		id = send_tweet(riddle)
-		insert_riddle(db,[id,riddle,NE])
+		post_id,timestamp = send_tweet(riddle)
+		insert_riddle(db,post_id,riddle,NE,timestamp)
 	else:
 		print 'no riddle posted'

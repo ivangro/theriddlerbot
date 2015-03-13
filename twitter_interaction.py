@@ -1,6 +1,7 @@
 #!/Users/ben/anaconda/bin/python
 
 from pattern.web import URL, Twitter
+from pattern.db import date
 import json
 from keyholder import riddlerbot_key
 
@@ -19,6 +20,8 @@ def send_tweet(tweet, reply_id=False, reply_user=None):
 	"""
 	if reply_id:
 		if reply_user:
+			if not reply_user.startswith('@'):
+				reply_user = '@' + reply_user
 			tweet = reply_user + " " + tweet
 		url = URL("https://api.twitter.com/1.1/statuses/update.json", method="post", query={"status": tweet, "in_reply_to_status_id": reply_id})
 	else:
@@ -29,21 +32,26 @@ def send_tweet(tweet, reply_id=False, reply_user=None):
 	try:
 		# Send the post request while downloading its data
 		data = jload(url)
+		post_id = int(data[u'id'])
+		timestamp = date(data[u'created_at'])
 		print "Message successfully sent: " + tweet
 	except Exception as e:
 		print e
 		print e.src
 		print e.src.read()
-		return 0
-	return int(data[u'id'])
+		return 0,date(0)
+	return post_id,timestamp
 
-def get_replies(reply_id):
+def get_replies(reply_id, since=None):
 	"""
-	Retrieve all replies that were posted to the tweet with the 'reply_id'.
+	Retrieve all replies that were posted since the tweet with id 'since' 
+	as a reply to the tweet with the 'reply_id'.
 	Returns a dictionary with timestamps as keys and 
 	tuples of user name and tweet text as values.
 	"""	
-	url = URL("https://api.twitter.com/1.1/statuses/mentions_timeline.json", method="get", query={"since_id":reply_id})
+	if not since:
+		since = reply_id
+	url = URL("https://api.twitter.com/1.1/statuses/mentions_timeline.json", method="get", query={"since_id":since})
 	twitter = Twitter(license=riddlerbot_key)
 	url = twitter._authenticate(url)
 	
@@ -52,10 +60,13 @@ def get_replies(reply_id):
 		data = jload(url)
 		for reply in data:
 			if reply["in_reply_to_status_id"] == reply_id:
-				name = reply["user"]["name"].encode('utf-8').strip()
+				#print reply
+				post_id = reply["id"]
+				author_name = reply["user"]["screen_name"].encode('utf-8')
+				author_id = reply["user"]["id"]
 				text = reply["text"].replace("@TheRiddlerBot","").strip()
-				time = reply["created_at"]
-				user_replies[time] = name,text 
+				timestamp = date(reply["created_at"])
+				user_replies[timestamp] = post_id,author_id,author_name,text,timestamp 
 	except Exception as e:
 		print e
 		print e.src
@@ -72,6 +83,7 @@ def get_stats(id):
 	url = twitter._authenticate(url)
 	try:
 		data = jload(url)
+		#print data
 	except Exception as e:
 		print e
 		return 0,0
@@ -80,6 +92,6 @@ def get_stats(id):
 	return nr_retw,nr_fav
 
 if __name__ == "__main__":
-	#print get_stats(557089932356104192)
+	print get_stats(557089932356104192)
 	#t = send_tweet('ok1')
 	print 'nothing set'
