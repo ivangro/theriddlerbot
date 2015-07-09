@@ -64,6 +64,12 @@ def find_aliases(characterName):
                     #print "End of header detected"
                     break
         #print "FINISHED"
+    cut_aliases = []
+    for alias in aliases:
+        if '(' in alias:
+            cut_aliases.append(alias.split('(')[0].strip())
+    aliases.extend(cut_aliases)
+    aliases.append(characterName)
     return aliases
 
 """
