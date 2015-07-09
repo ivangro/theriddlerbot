@@ -11,7 +11,7 @@ def jload(url):
 
 def send_tweet(tweet, reply_id=False, reply_user=None):
 	"""
-	This function sends tweets from our twitter account: @TheRiddlerBot
+	Send tweets from our twitter account: @TheRiddlerBot
 	Parameter 'tweet' is a string with the message to be sent
 	Optional parameters (for replying to tweets)
 		'reply_id' is the id of the message to answer to.
@@ -90,8 +90,39 @@ def get_stats(id):
 	nr_retw = data['retweet_count']
 	nr_fav = data['favorite_count']
 	return nr_retw,nr_fav
+	
+def add_friend(user_id):
+	"""
+	Start following the account with given user id
+	"""
+	url = URL("https://api.twitter.com/1.1/friendships/create.json", method="post", query={"user_id": user_id, 'following': "true"})
+	twitter = Twitter(license=riddlerbot_key)
+	url = twitter._authenticate(url)
+	print 'Friend added'
+	return jload(url)
+	
+def get_friends():
+	"""
+	Retrieve all accounts we follow
+	"""
+	url = URL("https://api.twitter.com/1.1/friends/ids.json", method="get", query={"screen_name": "TheRiddlerBot"})
+	twitter = Twitter(license=riddlerbot_key)
+	url = twitter._authenticate(url)
+	data = jload(url)
+	return data[u"ids"]
+
+def favorite(id):
+	"""
+	Favorite the tweet with given id
+	"""
+	url = URL("https://api.twitter.com/1.1/favorites/create.json", method="post", query={"id": id})
+	twitter = Twitter(license=riddlerbot_key)
+	url = twitter._authenticate(url)
+	data = jload(url)
+	return data
 
 if __name__ == "__main__":
-	print get_stats(557089932356104192)
+	#print get_stats(557089932356104192)
 	#t = send_tweet('ok1')
-	print 'nothing set'
+	#print get_friends()
+	print add_friend(424525840)
