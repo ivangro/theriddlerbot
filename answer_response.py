@@ -5,8 +5,7 @@ from database_handler import load_database, load_paraphrases
 from pattern.db import Datasheet, ALL
 import random
 import time
-
-time.sleep(30)
+import cPickle
 
 # Load database
 db = load_database('theriddlerbot')
@@ -26,8 +25,10 @@ if not status:
 	text = '.@TheRiddlerBot ' + answer.replace('NE',NE)
 	# Post the answer as reply to the original riddle tweet
 	send_tweet(text,reply_id=id)
-	#db.riddles.update(id, status=True)
+	db.riddles.update(id, {'nr_responses':db.responses.count()})
+	db.responses.remove(ALL)
+	# Indicate that answer has now been posted
+	cPickle.dump(True, open('answer_posted.cPickle','w'))
 else:
 	print "The last riddle was already answered."
 
-db.responses.remove(ALL)

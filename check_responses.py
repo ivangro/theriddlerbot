@@ -7,10 +7,15 @@ from wikipedia_utils import find_aliases
 import random
 import sys
 import time
+import cPickle
 
 db = load_database('theriddlerbot')
 
-templates = load_paraphrases()
+# Check whether the answer has already been posted.
+try:
+	answer_posted = cPickle.load(open('answer_posted.cPickle','r'))
+except:
+	answer_posted == False
 
 # Load the last posted riddle from the database
 try:
@@ -23,6 +28,9 @@ except:
 if last_tweet[4]:
 	print "Riddle already solved"
 	sys.exit()
+# Don't bother checking for replies if the answer has already been posted
+if answer_posted:
+		sys.exit()
 
 # If there is one, load the last seen response from the database
 try:
@@ -32,11 +40,12 @@ except:
 
 # Get all new responses to this riddle from Twitter
 replies = get_replies(last_tweet[0], since=last_answer[0])
-
 correct = last_tweet[3]
 # Add aliases from wikipedia redirects
 aliases = find_aliases(correct)
 correct_expanded = {x.lower():1 for x in aliases}
+
+templates = load_paraphrases()
 
 # Go through the responses chronologically
 for item in sorted(replies.keys()):
@@ -50,15 +59,16 @@ for item in sorted(replies.keys()):
 	#print author_name, author_id, text, timestamp
 	
 	if text.strip() in correct_expanded:
+		favorite(post_id)
 		# Tweet that it was correct
 		tw = '.@'+author_name+' '+random.choice(templates['RESP_CORRECT']).replace('NE',correct)
 		#print tw
 		send_tweet(tw, reply_id=post_id)
-		favorite(post_id)
 		# Update user score
 		update_score(db,author_id,author_name)
 		# Change status of riddle to solved and add nr of responses before the correct answer
 		db.riddles.update(last_tweet[0], {'status':True,'nr_responses':db.responses.count()}) 
+		db.responses.remove(ALL)
 		break
 	else:
 		# Tweet that it wasn't correct
@@ -68,5 +78,5 @@ for item in sorted(replies.keys()):
 		# Insert response in database
 		insert_response(db,post_id,author_id,author_name,text,timestamp)
 		continue
-	
+
 #print replies

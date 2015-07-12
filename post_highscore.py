@@ -24,7 +24,7 @@ tweet = "This week's top scorers are: " + ', '.join(top3)
 #print tweet
 post_id,timestamp = send_tweet(tweet)
 
-time.sleep(3600)
+time.sleep(1800)
 
 scores = db.user_scores.filter(('author_name','correct_answers'))
 scores = sorted(scores, key=operator.itemgetter(1), reverse=True)
@@ -38,7 +38,7 @@ for name,count in scores:
 		top3.append(str(rank)+'. @'+name+ ' ('+ str(count) +')')
 		rank += 1
 
-tweet = "The all-time best riddle-guessers are: " + ', '.join(top3)
+tweet = "The all-time best riddle-solvers are: " + ', '.join(top3)
 #print tweet
 post_id,timestamp = send_tweet(tweet)
 
