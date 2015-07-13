@@ -61,8 +61,10 @@ def riddlerbot():
 	fixed_attrs = getFixedAttributes(NE)
 
 	riddle = generate_riddle(properties, NE, fixed_props=fixed_attrs)
-
-
+	
+	# Indicate that the answer has not been posted yet.
+	cPickle.dump(False, open('answer_posted.cPickle','w'))
+	
 	return riddle,NE
 
 for x in range(1):
